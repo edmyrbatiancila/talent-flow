@@ -1,12 +1,12 @@
-# RecruitLens
+# TalentFlow
 
 A modern Recruitment & Applicant Tracking System (ATS) built with Laravel, React, TypeScript, Inertia.js, and Tailwind CSS.
 
 ## Overview
 
-RecruitLens helps companies and recruiters manage job openings, applicants, and hiring pipelines in one centralized platform.
+TalentFlow helps companies and recruiters manage job openings, applicants, and hiring pipelines in one centralized platform.
 
-The goal of RecruitLens is to simplify recruitment workflows by providing an organized and efficient way to track candidates from application to hiring.
+The goal of TalentFlow is to simplify recruitment workflows by providing an organized and efficient way to track candidates from application to hiring.
 
 ---
 
