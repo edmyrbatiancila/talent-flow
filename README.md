@@ -14,7 +14,7 @@ The goal of TalentFlow is to simplify recruitment workflows by providing an orga
 
 ### Backend
 
-* Laravel 12
+* Laravel 13
 * MySQL
 * Laravel Validation
 * Laravel Policies

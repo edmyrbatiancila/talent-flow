@@ -6,6 +6,9 @@ Route::inertia('/', 'welcome')->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('dashboard', 'dashboard')->name('dashboard');
+
+    // ========== Job Openings Routes ==========
+    
 });
 
 require __DIR__.'/settings.php';
