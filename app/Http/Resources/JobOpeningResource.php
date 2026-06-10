@@ -14,6 +14,22 @@ class JobOpeningResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'department' => $this->department,
+            'employment_type' => $this->employment_type?->value,
+            'location' => $this->location,
+            'salary_min' => $this->salary_min,
+            'salary_max' => $this->salary_max,
+            'description' => $this->description,
+            'status' => $this->status?->value,
+            'archived_at' => $this->archived_at,
+            'created_at' => $this->created_at,
+            'user' => $this->whenLoaded('user', fn () => [
+                'id' => $this->user->id,
+                'name' => $this->user->name
+            ]),
+        ];
     }
 }

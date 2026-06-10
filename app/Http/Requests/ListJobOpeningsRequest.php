@@ -2,8 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\JobOpeningStatus;
+use App\Models\JobOpening;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ListJobOpeningsRequest extends FormRequest
 {
@@ -12,7 +15,7 @@ class ListJobOpeningsRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return $this->user()->can('viewAny', JobOpening::class);
     }
 
     /**
@@ -23,7 +26,8 @@ class ListJobOpeningsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'search' => ['nullable', 'string', 'max:255'],
+            'status' => ['nullable', Rule::enum(JobOpeningStatus::class)]
         ];
     }
 }
