@@ -31,7 +31,7 @@ class JobOpeningFactory extends Factory
                 'Marketing',
                 'Sales',
                 'Finance',
-                'Operations'
+                'Operations',
             ]),
             'employment_type' => fake()->randomElement(EmploymentType::cases())->value,
             'location' => fake()->city(),
@@ -39,7 +39,7 @@ class JobOpeningFactory extends Factory
             'salary_max' => $salaryMin + fake()->numberBetween(10000, 60000),
             'description' => fake()->paragraphs(3, true),
             'status' => fake()->randomElement(JobOpeningStatus::cases())->value,
-            'archived_at' => null
+            'archived_at' => null,
         ];
     }
 

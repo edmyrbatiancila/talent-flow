@@ -34,7 +34,7 @@ class StoreJobOpeningRequest extends FormRequest
             'salary_min' => ['nullable', 'integer', 'min:0'],
             'salary_max' => ['nullable', 'integer', 'gte:salary_min'],
             'description' => ['required', 'string'],
-            'status' => ['required', Rule::enum(JobOpeningStatus::class)]
+            'status' => ['required', Rule::enum(JobOpeningStatus::class)],
         ];
     }
 }

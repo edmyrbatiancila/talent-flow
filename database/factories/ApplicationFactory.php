@@ -22,13 +22,15 @@ class ApplicationFactory extends Factory
      */
     public function definition(): array
     {
+        $stage = fake()->randomElement(ApplicationStage::cases());
+
         return [
             'applicant_id' => Applicant::factory(),
             'job_opening_id' => JobOpening::factory(),
-            'stage' => fake()->randomElement(ApplicationStage::cases())->value,
+            'stage' => $stage->value,
             'applied_at' => fake()->dateTimeBetween('-6 months', 'now'),
-            'hired_at' => null,
-            'rejected_at' => null
+            'hired_at' => $stage === ApplicationStage::Hired ? now() : null,
+            'rejected_at' => $stage === ApplicationStage::Rejected ? now() : null,
         ];
     }
 
@@ -55,7 +57,7 @@ class ApplicationFactory extends Factory
         return $this->state(fn () => [
             'stage' => ApplicationStage::Rejected->value,
             'hired_at' => null,
-            'rejected_at' => now()
+            'rejected_at' => now(),
         ]);
     }
 }

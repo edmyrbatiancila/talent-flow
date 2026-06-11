@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Services;
 
 use App\Enums\ApplicationStage;
@@ -21,13 +20,13 @@ class CreateApplicantService
                 'email' => $data['email'],
                 'phone' => $data['phone'] ?? null,
                 'resume_path' => $resumePath,
-                'cover_letter' => $data['cover_letter'] ?? null
+                'cover_letter' => $data['cover_letter'] ?? null,
             ]);
 
             $applicant->applications()->create([
                 'job_opening_id' => $data['job_opening_id'],
                 'stage' => ApplicationStage::Applied,
-                'applied_at' => now()
+                'applied_at' => now(),
             ]);
 
             return $applicant;

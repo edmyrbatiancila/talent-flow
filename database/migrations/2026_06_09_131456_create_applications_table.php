@@ -33,12 +33,12 @@ return new class extends Migration
 
             $table->unique([
                 'applicant_id',
-                'job_opening_id'
+                'job_opening_id',
             ]);
 
             $table->index([
                 'stage',
-                'applied_at'
+                'applied_at',
             ]);
 
             $table->index('job_opening_id');

@@ -25,7 +25,7 @@ class UpdateApplicationStageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'stage' => ['required', Rule::enum(ApplicationStage::class)]
+            'stage' => ['required', Rule::enum(ApplicationStage::class)],
         ];
     }
 }

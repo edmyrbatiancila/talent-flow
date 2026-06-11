@@ -28,8 +28,9 @@ class JobOpeningResource extends JsonResource
             'created_at' => $this->created_at,
             'user' => $this->whenLoaded('user', fn () => [
                 'id' => $this->user->id,
-                'name' => $this->user->name
+                'name' => $this->user->name,
             ]),
+            'applications' => ApplicationResource::collection($this->whenLoaded('applications')),
         ];
     }
 }

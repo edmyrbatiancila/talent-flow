@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Applicant;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -14,7 +13,7 @@ class UpdateApplicantRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->can('update', Applicant::class);
+        return $this->user()->can('update', $this->route('applicant'));
     }
 
     /**
@@ -31,12 +30,11 @@ class UpdateApplicantRequest extends FormRequest
                 'required',
                 'email',
                 'max:255',
-                Rule::unique('applicants', 'email')->ignore($this->applicant)
+                Rule::unique('applicants', 'email')->ignore($this->applicant),
             ],
             'phone' => ['nullable', 'string', 'max:50'],
             'resume' => ['nullable', 'file', 'mimes:pdf,doc,docx', 'max:5120'],
             'cover_letter' => ['nullable', 'string'],
-            'job_opening_id' => ['required', 'exists:job_openings,id'],
         ];
     }
 }

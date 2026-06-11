@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\ApplicationStage;
+use Database\Factories\ApplicationFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,12 +15,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
     'stage',
     'applied_at',
     'hired_at',
-    'rejected_at'
+    'rejected_at',
 ])]
 
 class Application extends Model
 {
-    /** @use HasFactory<\Database\Factories\ApplicationFactory> */
+    /** @use HasFactory<ApplicationFactory> */
     use HasFactory;
 
     protected function casts(): array
@@ -28,7 +29,7 @@ class Application extends Model
             'stage' => ApplicationStage::class,
             'applied_at' => 'datetime',
             'hired_at' => 'datetime',
-            'rejected_at' => 'datetime'
+            'rejected_at' => 'datetime',
         ];
     }
 

@@ -27,7 +27,7 @@ class ListJobOpeningsRequest extends FormRequest
     {
         return [
             'search' => ['nullable', 'string', 'max:255'],
-            'status' => ['nullable', Rule::enum(JobOpeningStatus::class)]
+            'status' => ['nullable', Rule::enum(JobOpeningStatus::class)],
         ];
     }
 }

@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use App\Enums\EmploymentType;
 use App\Enums\JobOpeningStatus;
-use App\Models\JobOpening;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -34,7 +33,7 @@ class UpdateJobOpeningRequest extends FormRequest
             'salary_min' => ['nullable', 'integer', 'min:0'],
             'salary_max' => ['nullable', 'integer', 'gte:salary_min'],
             'description' => ['required', 'string'],
-            'status' => ['required', Rule::enum(JobOpeningStatus::class)]
+            'status' => ['required', Rule::enum(JobOpeningStatus::class)],
         ];
     }
 }

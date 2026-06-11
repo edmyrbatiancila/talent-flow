@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\ApplicationStage;
 use App\Models\Applicant;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ListApplicantsRequest extends FormRequest
 {
@@ -24,7 +26,11 @@ class ListApplicantsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'search' => ['nullable', 'string', 'max:255']
+            'search' => ['nullable', 'string', 'max:255'],
+            'stage' => ['nullable', Rule::enum(ApplicationStage::class)],
+            'job_opening_id' => ['nullable', 'exists:job_openings,id'],
+            'applied_from' => ['nullable', 'date'],
+            'applied_until' => ['nullable', 'date', 'after_or_equal:applied_from'],
         ];
     }
 }

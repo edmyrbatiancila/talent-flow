@@ -27,7 +27,7 @@ class ApplicantFactory extends Factory
             'resume_path' => fake()->optional()->randomElement([
                 'resumes/sample-resume-1.pdf',
                 'resumes/sample-resume-2.pdf',
-                'resumes/sample-resume-3.pdf'
+                'resumes/sample-resume-3.pdf',
             ]),
             'cover_letter' => fake()->optional()->paragraphs(2, true),
         ];

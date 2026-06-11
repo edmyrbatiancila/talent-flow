@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ListApplicantsRequest;
-use App\Models\Applicant;
 use App\Http\Requests\StoreApplicantRequest;
 use App\Http\Requests\UpdateApplicantRequest;
 use App\Http\Resources\ApplicantResource;
+use App\Models\Applicant;
 use App\Models\JobOpening;
 use App\Queries\ApplicantQuery;
 use App\Services\CreateApplicantService;
+use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -22,7 +23,7 @@ class ApplicantController extends Controller
     {
         return Inertia::render('applicants/index', [
             'applicants' => ApplicantResource::collection($query->paginate($request->validated())),
-            'filters' => $request->validated()
+            'filters' => $request->validated(),
         ]);
     }
 
@@ -31,7 +32,7 @@ class ApplicantController extends Controller
      */
     public function create(): Response
     {
-        $this->authorize('create', Applicant::class);
+        Gate::authorize('create', Applicant::class);
 
         return Inertia::render('applicants/create', [
             'jobOpenings' => JobOpening::query()
@@ -59,7 +60,7 @@ class ApplicantController extends Controller
      */
     public function show(Applicant $applicant): Response
     {
-        $this->authorize('view', $applicant);
+        Gate::authorize('view', $applicant);
 
         return Inertia::render('applicants/show', [
             'applicant' => new ApplicantResource(
@@ -73,7 +74,7 @@ class ApplicantController extends Controller
      */
     public function edit(Applicant $applicant): Response
     {
-        $this->authorize('update', $applicant);
+        Gate::authorize('update', $applicant);
 
         return Inertia::render('applicants/edit', [
             'applicant' => new ApplicantResource($applicant),
@@ -103,7 +104,7 @@ class ApplicantController extends Controller
      */
     public function destroy(Applicant $applicant)
     {
-        $this->authorize('delete', $applicant);
+        Gate::authorize('delete', $applicant);
 
         $applicant->delete();
 
