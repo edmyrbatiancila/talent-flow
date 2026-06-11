@@ -2,9 +2,11 @@
 
 namespace App\Queries;
 
+use App\Enums\JobOpeningStatus;
 use App\Models\JobOpening;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 
 class JobOpeningQuery
 {
@@ -26,5 +28,13 @@ class JobOpeningQuery
                 ->orWhere('department', 'like', "%{$search}%")
                 ->orWhere('location', 'like', "%{$search}%");
         });
+    }
+
+    public function openForWelcome(): Collection
+    {
+        return JobOpening::query()
+            ->where('status', JobOpeningStatus::Open)
+            ->latest()
+            ->get();
     }
 }

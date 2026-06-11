@@ -1,4 +1,5 @@
 import type { Auth } from '@/types/auth';
+import type { JobOpening } from './JobOpening';
 
 declare module 'react' {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -15,5 +16,14 @@ declare module '@inertiajs/core' {
             sidebarOpen: boolean;
             [key: string]: unknown;
         };
+    }
+}
+
+export type WelcomeProps = {
+    auth: {
+        user: unknown | null;
+    };
+    jobOpenings: {
+        data: JobOpening[];
     }
 }
