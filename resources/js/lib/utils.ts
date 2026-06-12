@@ -26,3 +26,5 @@ export function formatSalary(min: number | null, max: number | null) {
 
     return `Up to PHP ${max?.toLocaleString()}`;
 }
+
+export const formatter = new Intl.NumberFormat();
