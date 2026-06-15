@@ -10,6 +10,12 @@ Today's snapshot shows TalentFlow moving from a backend-first ATS foundation int
 
 The current gap is mostly in the remaining recruiter workflow screens. Several backend routes already point to Inertia pages that have not been created yet, so create, show, and edit screens for job openings and applicants are still pending. A dedicated applications view or pipeline board also has not been built yet.
 
+### June 15, 2026
+
+The job opening create workflow was started on the frontend. `resources/js/pages/job-openings/create.tsx` now provides a responsive Inertia form aligned with the existing job openings index design and the backend `StoreJobOpeningRequest` fields. Supporting frontend structure was also added for the create form data shape, job opening select option arrays, and reusable field error rendering.
+
+The next recruiter workflow gap is the remaining job opening show and edit pages, followed by the applicant create, show, and edit pages.
+
 ## Backend Progress
 
 ### Finished
@@ -115,7 +121,8 @@ The current gap is mostly in the remaining recruiter workflow screens. Several b
   - Pipeline stage bars
   - Recent applications
   - Recent job openings
-- Job openings index page exists:
+- Job openings frontend now includes:
+  - Create page with form fields for title, department, employment type, location, salary range, description, and status
   - Paginated list
   - Search form
   - Status filter controls
@@ -135,15 +142,14 @@ The current gap is mostly in the remaining recruiter workflow screens. Several b
 ### Frontend Still Missing Or Incomplete
 
 - These Inertia pages are referenced by routes/controllers but do not exist yet:
-  - `resources/js/pages/job-openings/create.tsx`
   - `resources/js/pages/job-openings/show.tsx`
   - `resources/js/pages/job-openings/edit.tsx`
   - `resources/js/pages/applicants/create.tsx`
   - `resources/js/pages/applicants/show.tsx`
   - `resources/js/pages/applicants/edit.tsx`
-- Dashboard quick actions link to the pending create pages.
+- Dashboard quick actions still link to pending applicant create flow.
 - Job opening and applicant index actions link to pending show/edit pages.
-- There is no frontend form yet for creating or editing job openings.
+- There is no frontend form yet for editing job openings.
 - There is no frontend form yet for creating or editing applicants or uploading resumes.
 - There is no applicant detail UI showing all applications for that applicant.
 - There is no job opening detail UI showing applications for that role.
@@ -197,7 +203,7 @@ The current gap is mostly in the remaining recruiter workflow screens. Several b
 
 ## Recommended Next Build Order
 
-1. Add the missing job opening create, show, and edit pages.
+1. Add the missing job opening show and edit pages.
 2. Add the missing applicant create, show, and edit pages, including resume upload.
 3. Add stage update controls on applicant or job opening detail pages.
 4. Add feature tests around the current ATS backend behavior.
