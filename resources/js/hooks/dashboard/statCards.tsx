@@ -1,8 +1,11 @@
-
-import { BriefcaseBusiness, ClipboardList, Gauge, UsersRound } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
-import type { StatKey } from "@/types/Dashboard";
-
+import {
+    BriefcaseBusiness,
+    ClipboardList,
+    Gauge,
+    UsersRound,
+} from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
+import type { StatKey } from '@/types/Dashboard';
 
 export const statCards: {
     key: StatKey;
@@ -14,7 +17,7 @@ export const statCards: {
         key: 'applications',
         label: 'Total Applications',
         icon: ClipboardList,
-        tone: 'bg-cyan-500/10 text-cyan-700 dark:text-cyan-300'
+        tone: 'bg-cyan-500/10 text-cyan-700 dark:text-cyan-300',
     },
     {
         key: 'applicants',
@@ -33,5 +36,5 @@ export const statCards: {
         label: 'Open Roles',
         icon: Gauge,
         tone: 'bg-amber-500/10 text-amber-700 dark:text-amber-300',
-    }
+    },
 ];

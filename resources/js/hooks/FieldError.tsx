@@ -3,5 +3,5 @@ export function FieldError({ message }: { message?: string }) {
         return null;
     }
 
-    return <p className="text-sm font-medium text-destructive">{message}</p>
+    return <p className="text-sm font-medium text-destructive">{message}</p>;
 }

@@ -25,5 +25,5 @@ export type WelcomeProps = {
     };
     jobOpenings: {
         data: JobOpening[];
-    }
-}
+    };
+};

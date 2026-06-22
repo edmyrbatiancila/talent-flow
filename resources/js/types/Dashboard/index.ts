@@ -1,4 +1,4 @@
-export type StatKey = 
+export type StatKey =
     | 'jobOpenings'
     | 'openJobOpenings'
     | 'applicants'
@@ -33,4 +33,4 @@ export type DashboardProps = {
     pipeline: Pipeline[];
     recentJobOpenings: RecentJobOpenings[];
     recentApplications: RecentApplications[];
-}
+};

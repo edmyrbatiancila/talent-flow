@@ -93,7 +93,7 @@ export default function Welcome() {
                     <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:56px_56px] opacity-40" />
 
                     <motion.div
-                        className="absolute right-[-160px] top-[-160px] size-[420px] rounded-full bg-indigo-200/40 blur-3xl"
+                        className="absolute top-[-160px] right-[-160px] size-[420px] rounded-full bg-indigo-200/40 blur-3xl"
                         animate={{ y: [0, 20, 0], x: [0, -12, 0] }}
                         transition={{
                             duration: 11,
@@ -126,7 +126,8 @@ export default function Welcome() {
                                 </Badge>
 
                                 <h1 className="max-w-xl text-5xl font-semibold tracking-normal text-slate-950 md:text-6xl">
-                                    Find the role where your next chapter moves faster.
+                                    Find the role where your next chapter moves
+                                    faster.
                                 </h1>
 
                                 <p className="mt-6 max-w-xl text-base leading-7 text-slate-600">
@@ -218,7 +219,7 @@ export default function Welcome() {
                                 </div>
 
                                 <div className="relative mb-4">
-                                    <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-slate-400" />
+                                    <Search className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-slate-400" />
                                     <Input
                                         value={search}
                                         onChange={(event) =>

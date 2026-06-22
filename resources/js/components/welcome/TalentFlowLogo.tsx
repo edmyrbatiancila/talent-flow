@@ -15,7 +15,7 @@ const TalentFlowLogo = () => {
                         strokeLinecap="round"
                     />
 
-                    <path 
+                    <path
                         d="M8.5 23.5C12.5 20.5 19.5 20.5 23.5 23.5"
                         stroke="currentColor"
                         strokeWidth="2.4"
@@ -25,7 +25,9 @@ const TalentFlowLogo = () => {
             </div>
 
             <div>
-                <p className="text-sm font-semibold leading-none text-zinc-950">TalentFlow</p>
+                <p className="text-sm leading-none font-semibold text-zinc-950">
+                    TalentFlow
+                </p>
                 <p className="mt-1 text-xs text-zinc-500">Recruitment ATS</p>
             </div>
         </div>

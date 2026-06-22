@@ -1,42 +1,41 @@
 export const employmentTypes = [
     {
-        label: 'Full time', value: 'full_time'
+        label: 'Full time',
+        value: 'full_time',
     },
     {
-        label: 'Part time', value: 'part_time'
-    },
-    {
-        label: 'Contract', value: 'contract'
+        label: 'Part time',
+        value: 'part_time',
     },
     {
         label: 'Contract',
-        value: "contract"
+        value: 'contract',
     },
     {
         label: 'Internship',
-        value: 'internship'
+        value: 'internship',
     },
     {
         label: 'Temporary',
-        value: 'temporary'
-    }
+        value: 'temporary',
+    },
 ];
 
 export const statuses = [
     {
         label: 'Draft',
-        value: 'draft'
+        value: 'draft',
     },
     {
         label: 'Open',
-        value: 'open'
+        value: 'open',
     },
     {
         label: 'Closed',
-        value: 'closed'
+        value: 'closed',
     },
     {
-        label: 'Archived', 
-        value: 'archived'
-    }
+        label: 'Archived',
+        value: 'archived',
+    },
 ];
