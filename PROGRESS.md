@@ -16,6 +16,16 @@ The job opening create workflow was started on the frontend. `resources/js/pages
 
 The next recruiter workflow gap is the remaining job opening show and edit pages, followed by the applicant create, show, and edit pages.
 
+### June 22, 2026
+
+The job opening edit workflow is now implemented on the frontend. `resources/js/pages/job-openings/edit.tsx` provides a responsive shadcn-based Inertia form that loads the selected job opening's existing values, submits updates through the generated resource route, displays backend validation errors, tracks unsaved changes, and supports resetting the form to its initial values.
+
+The edit page now correctly handles the Laravel JSON resource payload returned by `JobOpeningController::edit()`. A single `JobOpeningResource` reaches the Inertia page under the resource's `data` wrapper, so the page unwraps `jobOpening.data` before initializing `useForm`. Nullable salary values are also converted to strings so they work correctly as controlled HTML inputs.
+
+The existing backend edit and update flow was rechecked and did not require a new endpoint: authorization is handled by the job opening policy and `UpdateJobOpeningRequest`, validated updates are persisted by `JobOpeningController::update()`, and successful updates redirect to the job opening detail route. Frontend TypeScript and ESLint checks pass for the current create and edit pages.
+
+The next immediate gap is `resources/js/pages/job-openings/show.tsx`. Both job creation and job updates redirect to the show route, so that detail page should be completed before moving to the applicant forms.
+
 ## Backend Progress
 
 ### Finished
@@ -49,6 +59,8 @@ The next recruiter workflow gap is the remaining job opening show and edit pages
   - Search by title, department, or location
   - Status filtering
   - Create, show, edit, update, and archive behavior
+  - Edit payloads returned through `JobOpeningResource` with policy authorization
+  - Update validation through `UpdateJobOpeningRequest`
   - Archiving by setting status to `archived` and `archived_at`
 - Applicant backend flow supports:
   - Listing with pagination
@@ -123,12 +135,16 @@ The next recruiter workflow gap is the remaining job opening show and edit pages
   - Recent job openings
 - Job openings frontend now includes:
   - Create page with form fields for title, department, employment type, location, salary range, description, and status
+  - Edit page that preloads existing values from the wrapped job opening resource
+  - Edit form submission through the generated PUT resource route
+  - Unsaved-change tracking, reset controls, loading state, and validation error rendering
+  - Responsive shadcn UI cards, inputs, selects, labels, and buttons shared with the existing design
   - Paginated list
   - Search form
   - Status filter controls
   - Empty state
   - Pagination links
-  - View/edit links to pending pages
+  - View links to the pending detail page and working edit links
 - Applicants index page exists:
   - Paginated list
   - Search form
@@ -143,13 +159,11 @@ The next recruiter workflow gap is the remaining job opening show and edit pages
 
 - These Inertia pages are referenced by routes/controllers but do not exist yet:
   - `resources/js/pages/job-openings/show.tsx`
-  - `resources/js/pages/job-openings/edit.tsx`
   - `resources/js/pages/applicants/create.tsx`
   - `resources/js/pages/applicants/show.tsx`
   - `resources/js/pages/applicants/edit.tsx`
 - Dashboard quick actions still link to pending applicant create flow.
-- Job opening and applicant index actions link to pending show/edit pages.
-- There is no frontend form yet for editing job openings.
+- Job opening show links and applicant show/edit links still point to pending pages.
 - There is no frontend form yet for creating or editing applicants or uploading resumes.
 - There is no applicant detail UI showing all applications for that applicant.
 - There is no job opening detail UI showing applications for that role.
@@ -185,6 +199,8 @@ The next recruiter workflow gap is the remaining job opening show and edit pages
 
 ### Latest Local Check
 
+- `npm run types:check` was run on June 22, 2026 and passed.
+- ESLint was run on June 22, 2026 for the job opening create and edit pages and passed.
 - `php artisan test` was previously run on June 12, 2026.
 - Result: test execution did not complete because the local PHP installation is missing the SQLite PDO driver.
 - Test database connection: `sqlite`
@@ -203,7 +219,7 @@ The next recruiter workflow gap is the remaining job opening show and edit pages
 
 ## Recommended Next Build Order
 
-1. Add the missing job opening show and edit pages.
+1. Add the missing job opening show page, including the role details and related applications.
 2. Add the missing applicant create, show, and edit pages, including resume upload.
 3. Add stage update controls on applicant or job opening detail pages.
 4. Add feature tests around the current ATS backend behavior.
