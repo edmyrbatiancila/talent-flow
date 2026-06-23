@@ -27,9 +27,9 @@ import type {
     Applicant,
     ApplicantApplication,
     ApplicantFilters,
-    ApplicationStage,
     PaginatedApplicants,
 } from '@/types/Applicant';
+import type { ApplicationStage } from '@/types/Application';
 
 type ApplicantsIndexProps = {
     applicants: PaginatedApplicants;

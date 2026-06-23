@@ -1,13 +1,14 @@
 import type { JobOpening, PaginationLink } from '@/types/JobOpening';
+import type { ApplicationStage } from '../Application';
 
-export type ApplicationStage =
-    | 'applied'
-    | 'screening'
-    | 'interview'
-    | 'assessment'
-    | 'offer'
-    | 'hired'
-    | 'rejected';
+// export type ApplicationStage =
+//     | 'applied'
+//     | 'screening'
+//     | 'interview'
+//     | 'assessment'
+//     | 'offer'
+//     | 'hired'
+//     | 'rejected';
 
 export type ApplicantApplication = {
     id: number;

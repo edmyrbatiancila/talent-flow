@@ -1,3 +1,5 @@
+import type { JobOpeningApplication } from "../Application";
+
 export type JobOpening = {
     id: number;
     title: string;
@@ -14,6 +16,7 @@ export type JobOpening = {
         id: number;
         name: string;
     };
+    applications?: JobOpeningApplication[];
 };
 
 export type PaginationLink = {
