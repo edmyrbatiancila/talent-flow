@@ -15,55 +15,22 @@ import {
 import { motion } from 'motion/react';
 import { useMemo, useState } from 'react';
 import type { FormEvent } from 'react';
-
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { formatter, formatSalary } from '@/lib/utils';
+import { statuses, statusStyles } from '@/hooks/JobOpening/index/functions';
+import { formatter, formatSalary, labelFromValue, formatDate } from '@/lib/utils';
 import jobOpenings from '@/routes/job-openings';
 import type {
     JobOpeningFilters,
     PaginatedJobOpenings,
 } from '@/types/JobOpening';
 
+
 type JobOpeningsIndexProps = {
     jobOpenings: PaginatedJobOpenings;
     filters: JobOpeningFilters;
 };
-
-const statuses = [
-    { label: 'All', value: '' },
-    { label: 'Draft', value: 'draft' },
-    { label: 'Open', value: 'open' },
-    { label: 'Closed', value: 'closed' },
-    { label: 'Archived', value: 'archived' },
-];
-
-const statusStyles: Record<string, string> = {
-    draft: 'border-slate-200 bg-slate-50 text-slate-700 dark:border-slate-800 dark:bg-slate-900/40 dark:text-slate-300',
-    open: 'border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-900 dark:bg-emerald-950/40 dark:text-emerald-300',
-    closed: 'border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-900 dark:bg-amber-950/40 dark:text-amber-300',
-    archived:
-        'border-zinc-200 bg-zinc-50 text-zinc-600 dark:border-zinc-800 dark:bg-zinc-900/40 dark:text-zinc-300',
-};
-
-function labelFromValue(value: string) {
-    return value
-        .replace(/_/g, ' ')
-        .replace(/\b\w/g, (letter) => letter.toUpperCase());
-}
-
-function formatDate(value: string | null) {
-    if (!value) {
-        return 'Not set';
-    }
-
-    return new Intl.DateTimeFormat('en', {
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric',
-    }).format(new Date(value));
-}
 
 export default function Index({
     jobOpenings: paginatedJobs,

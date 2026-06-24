@@ -36,6 +36,12 @@ Local frontend checks were rerun with `npm.cmd` because PowerShell blocked the `
 
 The next immediate gap is now the applicant workflow screens: `resources/js/pages/applicants/create.tsx`, `resources/js/pages/applicants/show.tsx`, and `resources/js/pages/applicants/edit.tsx`.
 
+The applicant create workflow is now implemented on the frontend. `resources/js/pages/applicants/create.tsx` provides a responsive shadcn-based Inertia form aligned with the existing recruiter workspace design, accepts candidate identity fields, optional phone, optional resume upload, optional cover letter, and requires selecting an open job opening so the backend can create the initial application record.
+
+Supporting frontend types were added for the applicant create form payload and job opening select options. The page submits with `forceFormData` so resume uploads are sent correctly, and local TypeScript and ESLint checks pass for the current applicant create implementation.
+
+The next immediate gap is now `resources/js/pages/applicants/show.tsx`, followed by `resources/js/pages/applicants/edit.tsx`.
+
 ## Backend Progress
 
 ### Finished
@@ -164,17 +170,22 @@ The next immediate gap is now the applicant workflow screens: `resources/js/page
   - Empty state
   - Pagination links
   - View/edit links to pending pages
+- Applicants create page exists:
+  - Candidate identity fields
+  - Optional phone, resume upload, and cover letter fields
+  - Open job opening selection
+  - Multipart Inertia submission for resume upload
+  - Backend validation error rendering
+  - Responsive shadcn UI layout matching the existing recruiter workspace
 - Frontend types exist for dashboard, job opening, applicant, application stage, and pagination payloads.
 
 ### Frontend Still Missing Or Incomplete
 
 - These Inertia pages are referenced by routes/controllers but do not exist yet:
-  - `resources/js/pages/applicants/create.tsx`
   - `resources/js/pages/applicants/show.tsx`
   - `resources/js/pages/applicants/edit.tsx`
-- Dashboard quick actions still link to pending applicant create flow.
 - Applicant show/edit links still point to pending pages.
-- There is no frontend form yet for creating or editing applicants or uploading resumes.
+- There is no frontend form yet for editing applicants.
 - There is no applicant detail UI showing all applications for that applicant.
 - There is no recruiter-facing UI yet for changing an application's stage.
 - There is no applications index or kanban-style pipeline board.
@@ -211,8 +222,10 @@ The next immediate gap is now the applicant workflow screens: `resources/js/page
 - `npm.cmd run types:check` was run on June 24, 2026 and passed.
 - `npm.cmd run lint:check` was run on June 24, 2026 and passed.
 - `npm.cmd run format:check` was run on June 24, 2026 and reported formatting differences in:
+  - `resources/js/hooks/JobOpening/index/functions.tsx`
   - `resources/js/lib/utils.ts`
   - `resources/js/pages/job-openings/edit.tsx`
+  - `resources/js/pages/job-openings/index.tsx`
   - `resources/js/pages/job-openings/show.tsx`
   - `resources/js/types/Application/index.d.ts`
   - `resources/js/types/JobOpening/index.d.ts`
@@ -235,7 +248,7 @@ The next immediate gap is now the applicant workflow screens: `resources/js/page
 ## Recommended Next Build Order
 
 1. Normalize frontend formatting with Prettier so the latest show-page work reaches a clean checkpoint.
-2. Add the missing applicant create, show, and edit pages, including resume upload.
+2. Add the missing applicant show and edit pages.
 3. Add stage update controls on applicant or job opening detail pages.
 4. Add feature tests around the current ATS backend behavior.
 5. Add an applications index or pipeline board grouped by stage.
