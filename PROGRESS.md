@@ -26,6 +26,16 @@ The existing backend edit and update flow was rechecked and did not require a ne
 
 The next immediate gap is `resources/js/pages/job-openings/show.tsx`. Both job creation and job updates redirect to the show route, so that detail page should be completed before moving to the applicant forms.
 
+### June 24, 2026
+
+The job opening show workflow is now implemented on the frontend. `resources/js/pages/job-openings/show.tsx` renders the selected job opening from the wrapped `JobOpeningResource`, follows the existing create/edit visual direction, and shows the role summary, status, description, job metadata, application count, and related applicants with their current pipeline stages.
+
+Shared frontend typing was expanded so job opening detail pages can safely consume related applications and nested applicant data. Supporting display helpers and badge style mappings now cover the job opening detail view.
+
+Local frontend checks were rerun with `npm.cmd` because PowerShell blocked the `npm.ps1` wrapper. TypeScript and ESLint passed. Prettier's check is currently failing only for formatting differences in several frontend files, including the new show page, so formatting should be normalized before the next clean checkpoint.
+
+The next immediate gap is now the applicant workflow screens: `resources/js/pages/applicants/create.tsx`, `resources/js/pages/applicants/show.tsx`, and `resources/js/pages/applicants/edit.tsx`.
+
 ## Backend Progress
 
 ### Finished
@@ -135,6 +145,7 @@ The next immediate gap is `resources/js/pages/job-openings/show.tsx`. Both job c
   - Recent job openings
 - Job openings frontend now includes:
   - Create page with form fields for title, department, employment type, location, salary range, description, and status
+  - Show page with job details, metadata, application count, and related applicant list
   - Edit page that preloads existing values from the wrapped job opening resource
   - Edit form submission through the generated PUT resource route
   - Unsaved-change tracking, reset controls, loading state, and validation error rendering
@@ -144,7 +155,7 @@ The next immediate gap is `resources/js/pages/job-openings/show.tsx`. Both job c
   - Status filter controls
   - Empty state
   - Pagination links
-  - View links to the pending detail page and working edit links
+  - Working view links to the detail page and working edit links
 - Applicants index page exists:
   - Paginated list
   - Search form
@@ -158,15 +169,13 @@ The next immediate gap is `resources/js/pages/job-openings/show.tsx`. Both job c
 ### Frontend Still Missing Or Incomplete
 
 - These Inertia pages are referenced by routes/controllers but do not exist yet:
-  - `resources/js/pages/job-openings/show.tsx`
   - `resources/js/pages/applicants/create.tsx`
   - `resources/js/pages/applicants/show.tsx`
   - `resources/js/pages/applicants/edit.tsx`
 - Dashboard quick actions still link to pending applicant create flow.
-- Job opening show links and applicant show/edit links still point to pending pages.
+- Applicant show/edit links still point to pending pages.
 - There is no frontend form yet for creating or editing applicants or uploading resumes.
 - There is no applicant detail UI showing all applications for that applicant.
-- There is no job opening detail UI showing applications for that role.
 - There is no recruiter-facing UI yet for changing an application's stage.
 - There is no applications index or kanban-style pipeline board.
 
@@ -199,8 +208,14 @@ The next immediate gap is `resources/js/pages/job-openings/show.tsx`. Both job c
 
 ### Latest Local Check
 
-- `npm run types:check` was run on June 22, 2026 and passed.
-- ESLint was run on June 22, 2026 for the job opening create and edit pages and passed.
+- `npm.cmd run types:check` was run on June 24, 2026 and passed.
+- `npm.cmd run lint:check` was run on June 24, 2026 and passed.
+- `npm.cmd run format:check` was run on June 24, 2026 and reported formatting differences in:
+  - `resources/js/lib/utils.ts`
+  - `resources/js/pages/job-openings/edit.tsx`
+  - `resources/js/pages/job-openings/show.tsx`
+  - `resources/js/types/Application/index.d.ts`
+  - `resources/js/types/JobOpening/index.d.ts`
 - `php artisan test` was previously run on June 12, 2026.
 - Result: test execution did not complete because the local PHP installation is missing the SQLite PDO driver.
 - Test database connection: `sqlite`
@@ -219,7 +234,7 @@ The next immediate gap is `resources/js/pages/job-openings/show.tsx`. Both job c
 
 ## Recommended Next Build Order
 
-1. Add the missing job opening show page, including the role details and related applications.
+1. Normalize frontend formatting with Prettier so the latest show-page work reaches a clean checkpoint.
 2. Add the missing applicant create, show, and edit pages, including resume upload.
 3. Add stage update controls on applicant or job opening detail pages.
 4. Add feature tests around the current ATS backend behavior.
