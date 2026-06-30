@@ -1,3 +1,6 @@
+import { Head, Link, router } from "@inertiajs/react";
+import { ArrowLeft, BriefcaseBusiness, CalendarClock, CheckCircle, Edit, FileText, Mail, Phone, UserRound, UserRoundCheck } from "lucide-react";
+import { motion } from 'motion/react';
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,11 +14,8 @@ import applicants from "@/routes/applicants";
 import applications from "@/routes/applications";
 import jobOpenings from "@/routes/job-openings";
 import storage from "@/routes/storage";
-import { Applicant, ApplicantApplication } from "@/types/Applicant";
-import { ApplicationStage } from "@/types/Application";
-import { Head, Link, router } from "@inertiajs/react";
-import { ArrowLeft, BriefcaseBusiness, CalendarClock, CheckCircle, Edit, FileText, Mail, Phone, UserRound, UserRoundCheck } from "lucide-react";
-import { motion } from 'motion/react';
+import type { Applicant, ApplicantApplication } from "@/types/Applicant";
+import type { ApplicationStage } from "@/types/Application";
 
 interface ShowApplicantProps {
     applicant: {

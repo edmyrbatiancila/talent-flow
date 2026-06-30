@@ -42,6 +42,18 @@ Supporting frontend types were added for the applicant create form payload and j
 
 The next immediate gap is now `resources/js/pages/applicants/show.tsx`, followed by `resources/js/pages/applicants/edit.tsx`.
 
+### June 30, 2026
+
+The applicant edit workflow is now implemented on the frontend. `resources/js/pages/applicants/edit.tsx` loads the wrapped applicant resource, preloads candidate identity fields, supports optional resume replacement through multipart Inertia submission, renders validation errors, and redirects through the existing backend update flow.
+
+The applicant show workflow is now implemented on the frontend. `resources/js/pages/applicants/show.tsx` renders the selected applicant from `ApplicantController::show()`, displays contact details, resume access, cover letter content, application history, linked job openings, and stage badges. The page also connects to the existing `applications/{application}/stage` PATCH route so recruiters can update an applicant application's hiring stage from the detail screen.
+
+Resume replacement cleanup is now implemented in `ApplicantController::update()`. When a recruiter uploads a replacement resume, the previous file is deleted from the public storage disk before the applicant record is updated with the new resume path.
+
+Local frontend checks were rerun with `npm.cmd` because PowerShell blocks the `npm.ps1` wrapper. TypeScript and ESLint passed for the current applicant show/edit work.
+
+The next immediate gap is a broader applications workflow, such as an applications index or kanban-style pipeline board, followed by ATS feature tests and tighter applicant/application authorization rules.
+
 ## Backend Progress
 
 ### Finished
@@ -83,6 +95,7 @@ The next immediate gap is now `resources/js/pages/applicants/show.tsx`, followed
   - Search by first name, last name, or email
   - Filtering by application stage, job opening, and application date range
   - Create with optional resume upload
+  - Resume replacement with cleanup of the previous uploaded file
   - Automatic initial application creation for the selected job opening
   - Show, edit, update, and delete behavior
 - Application stage updates are implemented:
@@ -114,7 +127,6 @@ The next immediate gap is now `resources/js/pages/applicants/show.tsx`, followed
 - There is no full application CRUD flow yet for listing, viewing, creating for an existing applicant, editing metadata, deleting, or withdrawing applications.
 - Applicant and application policies are still permissive. Job opening update/delete authorization checks ownership, but applicant/application ownership rules are not fully modeled.
 - Applicant listing is not currently scoped to the authenticated user's job openings, while dashboard metrics are user-scoped through job openings.
-- Resume replacement stores the new resume but does not delete the old uploaded file.
 - Application stage changes do not store a history of who changed the stage or what the previous stage was.
 - Recruiter notes, interview records, feedback, candidate sources, and activity logs are not modeled yet.
 - There are no ATS-specific feature tests for job openings, applicants, application creation, filters, or stage changes yet.
@@ -177,17 +189,23 @@ The next immediate gap is now `resources/js/pages/applicants/show.tsx`, followed
   - Multipart Inertia submission for resume upload
   - Backend validation error rendering
   - Responsive shadcn UI layout matching the existing recruiter workspace
+- Applicants edit page exists:
+  - Existing candidate identity values loaded from the wrapped applicant resource
+  - Optional resume replacement through multipart Inertia submission
+  - Backend validation error rendering
+  - Unsaved-change tracking and loading state
+  - Responsive shadcn UI layout matching the existing recruiter workspace
+- Applicants show page exists:
+  - Applicant profile summary
+  - Contact information and resume access
+  - Cover letter display and empty state
+  - Application history with linked job openings
+  - Current stage badges
+  - Recruiter-facing stage update controls backed by the existing application stage route
 - Frontend types exist for dashboard, job opening, applicant, application stage, and pagination payloads.
 
 ### Frontend Still Missing Or Incomplete
 
-- These Inertia pages are referenced by routes/controllers but do not exist yet:
-  - `resources/js/pages/applicants/show.tsx`
-  - `resources/js/pages/applicants/edit.tsx`
-- Applicant show/edit links still point to pending pages.
-- There is no frontend form yet for editing applicants.
-- There is no applicant detail UI showing all applications for that applicant.
-- There is no recruiter-facing UI yet for changing an application's stage.
 - There is no applications index or kanban-style pipeline board.
 
 ## Database Progress
@@ -219,8 +237,8 @@ The next immediate gap is now `resources/js/pages/applicants/show.tsx`, followed
 
 ### Latest Local Check
 
-- `npm.cmd run types:check` was run on June 24, 2026 and passed.
-- `npm.cmd run lint:check` was run on June 24, 2026 and passed.
+- `npm.cmd run types:check` was run on June 30, 2026 and passed.
+- `npm.cmd run lint:check` was run on June 30, 2026 and passed.
 - `npm.cmd run format:check` was run on June 24, 2026 and reported formatting differences in:
   - `resources/js/hooks/JobOpening/index/functions.tsx`
   - `resources/js/lib/utils.ts`
@@ -247,13 +265,11 @@ The next immediate gap is now `resources/js/pages/applicants/show.tsx`, followed
 
 ## Recommended Next Build Order
 
-1. Normalize frontend formatting with Prettier so the latest show-page work reaches a clean checkpoint.
-2. Add the missing applicant show and edit pages.
-3. Add stage update controls on applicant or job opening detail pages.
-4. Add feature tests around the current ATS backend behavior.
-5. Add an applications index or pipeline board grouped by stage.
-6. Tighten applicant and application authorization once ownership rules are clear.
-7. Add notes, interviews, and activity history.
+1. Normalize frontend formatting with Prettier so the latest frontend work reaches a clean checkpoint.
+2. Add an applications index or pipeline board grouped by stage.
+3. Add feature tests around the current ATS backend behavior.
+4. Tighten applicant and application authorization once ownership rules are clear.
+5. Add notes, interviews, and activity history.
 
 ## Current MVP Definition
 

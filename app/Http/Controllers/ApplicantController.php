@@ -11,6 +11,7 @@ use App\Models\JobOpening;
 use App\Queries\ApplicantQuery;
 use App\Services\CreateApplicantService;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -89,6 +90,10 @@ class ApplicantController extends Controller
         $data = $request->validated();
 
         if ($request->hasFile('resume')) {
+            if ($applicant->resume_path) {
+                Storage::disk('public')->delete($applicant->resume_path);
+            }
+
             $data['resume_path'] = $request->file('resume')->store('resumes', 'public');
         }
 
